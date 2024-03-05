@@ -15,9 +15,7 @@ Less（Leaner Style Sheets 的缩写）是一门 CSS 扩展语言，也称为 CS
 
 做为 CSS 的一种形式的扩展，它并没有减少 CSS 的功能，而是在现有的 CSS 语法上，为 CSS 加入程序式语言的特性。
 
-它在 CSS 的语法基础上，引入了变量，Mixin（混入），运算以及函数等功能，大大简化了 CSS 的编写，并且降低了 CSS 的维护成本，就像它的名称所说的那样，Less 可以让我们用更少的代码做更多的事情。
-
-Less 中文网址：[Less 快速入门 | Less.js 中文文档 - Less 中文网 (bootcss.com)](https://less.bootcss.com/)
+它在 CSS 的语法基础上，引入了变量，Mixin（混入），运算以及函数等功能，大大简化了 CSS 的编写，并且降低了 CSS 的维护成本
 
 常见的 CSS 预处理器：Sass、Less、Stylus
 
@@ -270,13 +268,31 @@ Less 提供了使用嵌套(nesting)代替层叠或与层叠结合使用的能力
 
 混合(Mixin)是一种将一组属性从一个规则集包含(或混入)到另一个规则集的方式，可理解为复制粘贴。
 
-### 7.1 普通混合
+也可以与映射配合使用
+
+### 7.1 混入
+
+
+```less
+  .clearfix() {
+    width:100px;
+    height:100px;
+  }
+
+  .a{
+    width: .clearfix()[width];
+  }
+```
+
+### 7.2 混入
+
+ >重复样式抽取，后混入其他样式
 
 1. 定义了一个bordered类
 2. 如果希望在其它规则集中使用这些属性，只需像下面这样输入所需属性的类（class）名称即可
 
 ```less
-// ()无参数可以不写 最好写上,与普通样式做区分并且在css中不会编译.
+// ()无参数可以不写 最好写上后面有可能被修复,与普通样式做区分并且在css中不会编译.
 // 使用时也可以不带()
 .bordered() {
   border-top: dotted 1px black;
@@ -324,7 +340,7 @@ Less 提供了使用嵌套(nesting)代替层叠或与层叠结合使用的能力
 }
 ```
 
-### 7.2 带参数的混合(Parametric Mixins)
+### 7.3 带参数的混入(Parametric Mixins)
 
 1. 混合带参数，参数需要按顺序传递,可以给默认参数
 
@@ -347,6 +363,7 @@ div {
 
 需注意的是，就算有默认值，也要按顺序传递
 
+
 ```less
 .border(@width, @style, @color: #ccc) {
   border: @width @style @color;
@@ -364,7 +381,7 @@ div {
 }
 ```
 
-### 7.3 命名参数
+### 7.4 命名参数
 
 可以在向混合传参是指定参数名称，从而不需要按顺序传入
 
@@ -383,7 +400,7 @@ div {
 }
 ```
 
-### 7.4 @arguments 变量
+### 7.5 @arguments 变量
 
 `@arguments` 变量包含了传入的所有参数
 
@@ -406,7 +423,7 @@ div {
 }
 ```
 
-### 7.5 匹配模式(Pattern-matching)
+### 7.6 匹配模式(Pattern-matching)
 
 在多个相同的混合中(参数个数必须相同)，匹配特定的混合。
 
@@ -436,7 +453,7 @@ div {
 }
 ```
 
-### 7.6 运算(Operations)
+### 7.7 运算(Operations)
 
 任何数字、颜色或者变量都可以参与运算。就是 Less 提供了加（+）、减（-）、乘（*）、除（/）算术运算。
 
@@ -509,8 +526,7 @@ nav ul {
 nav ul {
   background: blue;
 }
-.inline,
-nav ul {
+.inline,nav ul {
   color: red;
 }
 ```
