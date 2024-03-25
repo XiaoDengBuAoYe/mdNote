@@ -53,11 +53,54 @@ byte；short；int；long；char，boolean；float；double
 - 类型转换异常ClassCastException:强转错误
 - 字符串转换数字异常NumberFormatException
 - 空指针异常NullPointerException
-- 算数异常:1/0
-- sql异常
-  
+- 算数异常ArithmeticException:1/0
+- sql异常SQLException
+
+## 抽象类和接口的区别
+> 抽象类描述的是事物的本质:是一个什么东西.是用来被继承的.接口描述的是功能:有什么用,是用来被实现的.
+- 接口是:interface,抽象类是abstrat
+- 抽象类有构造器,到那时不能创建对象,目的是为了供子类调用,接口没有构造器.
+- 接口的所有方法都是抽象方法,所有属性都是静态常量;抽象类中可以有非抽象的方法和非常量的属性
+- 抽象类只能单继承,接口可以多实现
+## ==和equals()的区别
+
+- > == : 基本数据类型直接比值,引用类型比较内存地址
+- > equals() 方法是Object类的方法,底层和==一样,可以被重写,八大基本类型的包装类和String都重写了该方法和hashCode方法
+
+## 重写equals()方法为什么必须重写hashcode方法
+
+> 因为为了保证是一个对象,如果重写了equals方法,不重写hashcode方法会导致equals相等,hashcode不同的情况.
+> 使用hashcode提前校验,可以避免每一次都调用equals方法提高效率
+
+## String StringBuffer和SrtingBuilder
+- String 是一个常量类,存在于字符串常量池内,提高内存利用率,在创建字符串时JVM会检查池内是否存在,如果存在返回其引用,不存在实例化一个字符串,存入常量池,然后返回其引用
+-  String的一个可变工作类,可以对一个字符串进行多次修改,不会创建新对象
+   - StringBuffer : 线程安全,每个方法都加入了同步锁,适合多线程的环境执行.
+   - StringBuilder : 线程不安全,适合单线程环境执行.
+## Object 常用方法
+- eqluas
+- hashcode
+- clone
+- wait
+- notify
+- notifyall
+- finalize
+## String 常用方法
+
+- length
+- trim
+- join
+- split
+- subString
+- indexOf
+- lastIndexOf
+- concat
 
 
 
+## java创建对象的方式
 
-
+1. 使用new关键字,调用构造器创建
+2. 使用newInstance方法,反射调用创建
+3. 使用反序列化方法readObject()类必须实现Serializable接口
+4. 实现cloneAble接口,使用clone方法,进行拷贝.
